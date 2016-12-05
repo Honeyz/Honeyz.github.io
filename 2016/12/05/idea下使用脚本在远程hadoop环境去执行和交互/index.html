@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="idea,hadoop,运行脚本," />
 
 
 
@@ -84,23 +84,26 @@
 
 
 
-<meta name="description" content="title: idea下使用脚本在远程hadoop环境去执行和交互date: 2016-12-05 22:09:19tags:idea,hadoop,运行脚本
-categories:hadoop在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用
-1.idea创建ma">
+<meta name="description" content="在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用
+1.idea创建maven工程，目录结构如下
+
+input 文件下放程序需要读取的文件，每个程序对应input下一个文件夹，如wordcount，words文件为com.zju.czx.WordCount 要读取的文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="idea下使用脚本在远程hadoop环境去执行和交互">
 <meta property="og:url" content="http://honeyz.github.io/2016/12/05/idea下使用脚本在远程hadoop环境去执行和交互/index.html">
 <meta property="og:site_name" content="Honeyc's Blog">
-<meta property="og:description" content="title: idea下使用脚本在远程hadoop环境去执行和交互date: 2016-12-05 22:09:19tags:idea,hadoop,运行脚本
-categories:hadoop在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用
-1.idea创建ma">
+<meta property="og:description" content="在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用
+1.idea创建maven工程，目录结构如下
+
+input 文件下放程序需要读取的文件，每个程序对应input下一个文件夹，如wordcount，words文件为com.zju.czx.WordCount 要读取的文">
 <meta property="og:image" content="http://oh9zj3zsi.bkt.clouddn.com/blog_2_1.png">
-<meta property="og:updated_time" content="2016-12-05T14:16:37.265Z">
+<meta property="og:updated_time" content="2016-12-05T14:24:24.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="idea下使用脚本在远程hadoop环境去执行和交互">
-<meta name="twitter:description" content="title: idea下使用脚本在远程hadoop环境去执行和交互date: 2016-12-05 22:09:19tags:idea,hadoop,运行脚本
-categories:hadoop在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用
-1.idea创建ma">
+<meta name="twitter:description" content="在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用
+1.idea创建maven工程，目录结构如下
+
+input 文件下放程序需要读取的文件，每个程序对应input下一个文件夹，如wordcount，words文件为com.zju.czx.WordCount 要读取的文">
 <meta name="twitter:image" content="http://oh9zj3zsi.bkt.clouddn.com/blog_2_1.png">
 
 
@@ -330,7 +333,7 @@ categories:hadoop在ideal下创建maven工程，编写mapreduce程序，调用�
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-05T22:16:13+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-05T22:09:19+08:00">
                 2016-12-05
               </time>
             
@@ -340,6 +343,24 @@ categories:hadoop在ideal下创建maven工程，编写mapreduce程序，调用�
             
           </span>
 
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">hadoop</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -378,9 +399,7 @@ categories:hadoop在ideal下创建maven工程，编写mapreduce程序，调用�
       
 
       
-        <hr>
-<p>title: idea下使用脚本在远程hadoop环境去执行和交互<br>date: 2016-12-05 22:09:19<br>tags:idea,hadoop,运行脚本</p>
-<h2 id="categories-hadoop"><a href="#categories-hadoop" class="headerlink" title="categories:hadoop"></a>categories:hadoop</h2><p><strong>在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用</strong></p>
+        <p><strong>在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用</strong></p>
 <h2 id="1-idea创建maven工程，目录结构如下"><a href="#1-idea创建maven工程，目录结构如下" class="headerlink" title="1.idea创建maven工程，目录结构如下"></a>1.idea创建maven工程，目录结构如下</h2><p><img src="http://oh9zj3zsi.bkt.clouddn.com/blog_2_1.png" alt="maven目录结构"></p>
 <blockquote>
 <p>input 文件下放程序需要读取的文件，每个程序对应input下一个文件夹，如wordcount，words文件为com.zju.czx.WordCount 要读取的文件;<br>output 下为程序执行完成从hdfs上放下的文件<br>target 存放整个项目的打包生成的jar<br>src 存放mapreduce的程序<br>shell 存放执行脚本，通过脚本来对虚拟机上进行操作</p>
@@ -409,6 +428,12 @@ categories:hadoop在ideal下创建maven工程，编写mapreduce程序，调用�
 
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/idea-hadoop-运行脚本/" rel="tag"># idea,hadoop,运行脚本</a>
+          
+        </div>
       
 
       
@@ -522,7 +547,7 @@ categories:hadoop在ideal下创建maven工程，编写mapreduce程序，调用�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -531,7 +556,7 @@ categories:hadoop在ideal下创建maven工程，编写mapreduce程序，调用�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -604,7 +629,7 @@ categories:hadoop在ideal下创建maven工程，编写mapreduce程序，调用�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#categories-hadoop"><span class="nav-number">1.</span> <span class="nav-text">categories:hadoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-idea创建maven工程，目录结构如下"><span class="nav-number">2.</span> <span class="nav-text">1.idea创建maven工程，目录结构如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-在idea这个开发环境的机器上，与master设置ssh的免密码登录"><span class="nav-number">3.</span> <span class="nav-text">2.在idea这个开发环境的机器上，与master设置ssh的免密码登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-编写脚本，将开发环境与master进行开发"><span class="nav-number">4.</span> <span class="nav-text">3.编写脚本，将开发环境与master进行开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-idea创建maven工程，目录结构如下"><span class="nav-number">1.</span> <span class="nav-text">1.idea创建maven工程，目录结构如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-在idea这个开发环境的机器上，与master设置ssh的免密码登录"><span class="nav-number">2.</span> <span class="nav-text">2.在idea这个开发环境的机器上，与master设置ssh的免密码登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-编写脚本，将开发环境与master进行开发"><span class="nav-number">3.</span> <span class="nav-text">3.编写脚本，将开发环境与master进行开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
