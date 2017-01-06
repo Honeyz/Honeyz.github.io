@@ -1,0 +1,1004 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mongodb-plugin,nosql,mongodb-java," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="mongodb支持google提出的mapreduce并行编程，通过启动分片和水平扩展、读写分离，与关系数据库比较：table –&amp;gt;  collection; row –&amp;gt;doucument/object(BSON)。
+mongodb进程
+mongod进程：负责整个mongodb中最核心的内容，负责数据库的创建， 删除等，运行在服务器上进行监听。
+1234567mongod --con">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mongodb-1">
+<meta property="og:url" content="http://honeyz.github.io/2016/12/15/mongodb-1/index.html">
+<meta property="og:site_name" content="Honeyc's Blog">
+<meta property="og:description" content="mongodb支持google提出的mapreduce并行编程，通过启动分片和水平扩展、读写分离，与关系数据库比较：table –&amp;gt;  collection; row –&amp;gt;doucument/object(BSON)。
+mongodb进程
+mongod进程：负责整个mongodb中最核心的内容，负责数据库的创建， 删除等，运行在服务器上进行监听。
+1234567mongod --con">
+<meta property="og:updated_time" content="2017-01-06T19:56:55.480Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mongodb-1">
+<meta name="twitter:description" content="mongodb支持google提出的mapreduce并行编程，通过启动分片和水平扩展、读写分离，与关系数据库比较：table –&amp;gt;  collection; row –&amp;gt;doucument/object(BSON)。
+mongodb进程
+mongod进程：负责整个mongodb中最核心的内容，负责数据库的创建， 删除等，运行在服务器上进行监听。
+1234567mongod --con">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://honeyz.github.io/2016/12/15/mongodb-1/"/>
+
+
+
+
+
+  <title> mongodb-1 | Honeyc's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Honeyc's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">code and life</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+
+
+<!--
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=426881506&auto=1&height=66"></iframe> -->
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://honeyz.github.io/2016/12/15/mongodb-1/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Honeycc">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/czx.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Honeyc's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Honeyc's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                mongodb-1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T03:54:33+08:00">
+                2016-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mongodb/" itemprop="url" rel="index">
+                    <span itemprop="name">mongodb</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/15/mongodb-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/15/mongodb-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><em>mongodb支持google提出的mapreduce并行编程，通过启动分片和水平扩展、读写分离，与关系数据库比较：table –&gt;  collection; row –&gt;doucument/object(BSON)。</em></p>
+<h3 id="mongodb进程"><a href="#mongodb进程" class="headerlink" title="mongodb进程"></a>mongodb进程</h3><ol>
+<li><p>mongod进程：负责整个mongodb中最核心的内容，负责数据库的创建， 删除等，运行在服务器上进行监听。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">mongod --config /home/honeycc/properties.conf</div><div class="line"># properties.conf</div><div class="line"># dbpath = /home/honeycc/db/data</div><div class="line"># logpath = /home/honeycc/logs/log.log</div><div class="line"># journal = true 启动数据库实例的日志功能，数据库当宕机后重启恢复</div><div class="line"># port = 27017 </div><div class="line"># auth = true  启动数据库实例的权限控制功能</div></pre></td></tr></table></figure>
+</li>
+<li><p>mongo进程:交互式shell界面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongo --port 27017 -username root -password root -autheticationDatabase gps_db</div></pre></td></tr></table></figure>
+</li>
+<li><p>mongodump备份、mongoexport、mongoimport、mongos分片、mongofiles分布式文件存储系统接口、mongostat状态、mongotop性能跟踪</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mongodump --port 27017 --db gps_db --out /home/honeycc/back</div><div class="line"></div><div class="line">mongoexport --port 27017 --db gps_db --collection gps_data --out /home/honeycc/gps_data.json</div><div class="line"></div><div class="line">mongoinport --port 27017 --db gps_db --collection gps_data --file /home/honeycc/gps_data.json</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="mongodb-数据库操作"><a href="#mongodb-数据库操作" class="headerlink" title="mongodb 数据库操作"></a>mongodb 数据库操作</h2><ol>
+<li><p>查询选择器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">db.gps_data.find().pretty() </div><div class="line"># 格式化输出</div><div class="line"></div><div class="line">db.gps_data.find(&#123;id:9,&quot;province&quot;:&quot;Zhejiang&quot;&#125;) </div><div class="line"># 精确查找</div><div class="line"></div><div class="line">db.gps_data.find(&#123;&quot;GPSTIME&quot;:&#123;&quot;&amp;lt&quot;:new Date(&quot;2016-12-10&quot;)&#125;)</div><div class="line"># 比较操作符&quot;$gt&quot; 、&quot;$gte&quot;、 &quot;$lt&quot;、 &quot;$lte&quot;、&quot;$ne&quot;(分别对应&quot;&gt;&quot;、 &quot;&gt;=&quot; 、&quot;&lt;&quot; 、&quot;&lt;=&quot;、&quot;=&quot;)，组合起来进行范围的查找</div><div class="line"></div><div class="line">db.gps_data.find(&#123;&quot;GPSTIME&quot;:&#123;&quot;$in&quot;:[null],$exists:true&#125;&#125;)</div><div class="line"># 返回gpstime为null值的文档，如果$exists:false返回gpstime不为null的所有字段</div><div class="line">#$in:[] ; $nin:[].单独使用$nin $ne会进行全表扫描,应与其他选择器配合使用 </div><div class="line"></div><div class="line">db.gps_data.find(&#123;$and:[&#123;&#125;,&#123;&#125;]&#125;)</div><div class="line"># $or:[&#123;&#125;,&#123;&#125;] $and:[&#123;&#125;,&#123;&#125;]</div><div class="line"></div><div class="line">db.gps_data.find(&quot;driver.message.age&quot;:20)</div><div class="line"># 多层结构</div></pre></td></tr></table></figure>
+</li>
+<li><p>查询投射</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">db.gps_data.find(&#123;&quot;GPSTIME&quot;:&#123;&quot;&amp;lt&quot;:new Date(&quot;2016-12-10&quot;)&#125;,&#123;_id:0,GPSTIME:1,CODE:1,driver.message.phone:1,GPSTIME:&#123;&quot;$slice&quot;:-1&#125;&#125;)</div><div class="line"># db.gps_data.find(&#123;&#125;,&#123;&#125;)</div><div class="line"># 第一个&#123;&#125;内为查询选择器;第二个&#123;&#125;内为对前面返回的结构集进一步过滤条件，投射项,$slice:-1返回数组最后一条数据</div><div class="line"></div><div class="line">db.gps_data.find(&#123;&#125;).sort(&#123;id:-1&#125;)</div><div class="line"># 排序效率低下，尽量确保排序的在索引上</div><div class="line"></div><div class="line">db.gps_data.find(&#123;&#125;).skip(10).limit(5).sort(&#123;id:-1&#125;)</div><div class="line"># 先排序，然后跳过10条，获取5条，尽量少用skip，效率低</div></pre></td></tr></table></figure>
+</li>
+<li><p>数组操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">db.gps_data.find(&#123;driver.message.phone:[110,112]&#125;)</div><div class="line"># 数组精确匹配</div><div class="line"></div><div class="line">db.gps_data.find(&#123;driver.message.phone:112&#125;)</div><div class="line"># 数组包含匹配</div><div class="line">    </div><div class="line">db.gps_data.find(&#123;driver.message.phone.1:112&#125;)</div><div class="line"># 数组位置匹配，第二个电话为112的</div></pre></td></tr></table></figure>
+</li>
+<li><p>增删改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">db.gps_data.insert(&#123;&#125;) # _id 要唯一</div><div class="line"> </div><div class="line">db.gps_data.update(query,update,&lt;upsert&gt;,&lt;multi&gt;)</div><div class="line">db.gps_data.update(&#123;CODE:&quot;浙B26827&quot;&#125;,&#123;$set : &#123; GPSTIME:new Date() &#125;,$inc:&#123;driver.message.phone:100&#125;&#125;) </div><div class="line">#  第一个文档 更改车牌为浙B26827的，$set 把GPSTIME更改为当前时间，$inc 新增属性</div><div class="line"></div><div class="line">db.gps_data.update(&#123;CODE:&quot;浙B26827&quot;&#125;,&#123;CODE:&quot;浙B26821&quot;&#125;) </div><div class="line"># 第一个文档 把其他属性都擦除掉了</div><div class="line"></div><div class="line"> db.gps_data.update(&#123;CODE:&quot;浙B26827&quot;&#125;,&#123;$set:&#123;GPSTIME:new Date() &#125;,$inc:&#123;driver.message.phone:100&#125;&#125;,&#123;upsert:true&#125; ，&#123;multi:true&#125;) </div><div class="line"> # &#123;multi:true&#125; 所有文档 &#123;upsert:true&#125; 找不到则插入</div><div class="line"></div><div class="line">db.gps_data.remove(&lt;query&gt;,&lt;justOne&gt;)</div><div class="line">db.gps_data.remove(&#123;CODE:&quot;浙B26827&quot;&#125;,1)</div><div class="line"># 删除全部、limt 1 删除一个</div></pre></td></tr></table></figure>
+</li>
+<li><p>索引:提高数据获取的性能，<br>在linux文件系统中，磁盘抽象为 </p>
+<blockquote>
+<blockquote>
+<p>引导块   超级块  索引节点表  数据块</p>
+</blockquote>
+</blockquote>
+<p><em>流程:索引节点表保存了所有文件或者目录对应的inode节点，通过文件名或目录找到对应的inode节点，通过inode节点定位到文件数据在文件系统中的逻辑块号，最后根据磁盘驱动程序将逻辑块号映射到磁盘具体的块号。</em></p>
+<p>数据库上保存记录的机制是建立在文件系统上的，索引也是以文件的形式存储在磁盘上，运用最多的索引结构是B树。</p>
+<p><strong>Mongodb索引:</strong>B+树<br>db.gps_data.ensureIndex({})创建索引<br>db.gps_data.dropIndex(“GPSTIME_1_CODE_1 “)</p>
+<ol>
+<li>单字段索引 _id，唯一索引 {unique:true}: db.system.indexes.find()</li>
+<li>符合索引  db.gps_data.ensureIndex({GPSTIME:1,CODE:1})</li>
+<li>数组的多键索引 对一个值为数组类型的字段创建索引，则默认会对数组中的每一个元素创建索引。</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li><p>聚集分析:聚集操作是对数据进行分析的有效手段。mongodb主要提供了三种对数据进行分析的计算方式:管道模式聚集分析、Mapreduce聚集分析、简单函数和命令的聚集分析</p>
+<ol>
+<li><p>管道模式:类unix上的管道命令 grep 层层过滤</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line">      db.gps_data.aggregate([&#123;$match:&#123;&#125;&#125;,&#123;$group:&#123;&#125;&#125;])</div><div class="line">     &apos;&apos;&apos;</div><div class="line">         常用管道操作符</div><div class="line">         $match: 过滤文档，值传递匹配文档到管道中的下一步骤</div><div class="line">         $limit: 限制管道中文档的数量</div><div class="line">         $skip: 跳过指定数量文档</div><div class="line">         $sort: 多所有文档进行排序</div><div class="line">         $group: 对所有文档进行分组然后计算聚集结果</div><div class="line">         $out: 将管道中的文档输出到一个具体集合中</div><div class="line">         </div><div class="line">         与$group操作一起使用的计算聚集值的操作符</div><div class="line">         $first、$last、$max、$min、$avg、$sum</div><div class="line">     &apos;&apos;&apos;</div><div class="line">     </div><div class="line">     # SQL语句与mongodb聚集操作语句比较</div><div class="line">     #  select count(*) as count from gps_data</div><div class="line">     db.gps_data.aggregate([</div><div class="line">         &#123;$group:&#123;_id:null,count:&#123;$sum:1&#125;&#125;&#125;</div><div class="line">         ])</div><div class="line">     </div><div class="line">     # select sum(num) as total from gps_data</div><div class="line">     db.gps_data.aggregate([</div><div class="line">         &#123;$group:&#123;_id:null,total:&#123;$sum:&quot;$num&quot;&#125;&#125;&#125;</div><div class="line">         ])</div><div class="line">     </div><div class="line">     # select driver_id,sum(num) as total from gps_data group by driver_id</div><div class="line">     db.gps_data.aggregate([</div><div class="line">         &#123;$group:&#123;_id:&quot;$driver_id&quot;,total:&#123;$sum:&quot;$num&quot;&#125;&#125;&#125;</div><div class="line">     ])</div><div class="line">     </div><div class="line">      # select driver_id,gpsdate,sum(num) as total from gps_data group by driver_id</div><div class="line">     db.gps_data.aggregate([</div><div class="line">         &#123;$group:&#123;_id:&#123;driver_id:&quot;$driver_id&quot;,gpsdate:&quot;gpsdate&quot;&#125;,total:&#123;$sum:&quot;$num&quot;&#125;&#125;&#125;</div><div class="line">         ])</div><div class="line">     </div><div class="line">      # select driver_id, count(*)   from gps_data group by driver_id having count(*) &gt; 1</div><div class="line">     db.gps_data.aggregate([</div><div class="line">         &#123;$group:&#123;_id:&quot;$driver_id&quot;,count:&#123;$sum:1&#125;&#125;&#125;,</div><div class="line">         &#123;$match:&#123;count :&#123;$gt:1&#125;&#125;&#125;            </div><div class="line">         ])</div><div class="line">```     </div><div class="line"></div><div class="line">2. Mapreduce模式聚集:用Mongodb做分布式存储，然后再用Mapreduce来做分析</div><div class="line">```shell</div><div class="line">     db.gps_data.mapReduce(</div><div class="line">         # map 函数</div><div class="line">         function()&#123;</div><div class="line">             emit(this.driver_id,this.num);</div><div class="line">         &#125;,</div><div class="line">         # reduce 函数</div><div class="line">         funtion(key,values)&#123;</div><div class="line">             return Array.sum(values)</div><div class="line">         &#125;,</div><div class="line">         &#123;</div><div class="line">             query:&#123; CODE:&quot;浙B25681&quot;&#125;， # 查询条件</div><div class="line">             outresult:&quot;driver_car_total&quot; # 输出结果到集合上</div><div class="line">         &#125;</div><div class="line">     )</div><div class="line">     &lt;----&gt;</div><div class="line">     select sum(num) as value, driver_id as _id</div><div class="line">     from gps_data</div><div class="line">     where CODE=&quot;浙B25681&quot;</div><div class="line">     group by driver_id</div><div class="line">     </div><div class="line">     将结果输出到 driver_car_total集合上</div><div class="line">     db.driver_cat_total.find()</div><div class="line">     &#123;</div><div class="line">         &quot;_id&quot;:1,&quot;value&quot;:2</div><div class="line">     &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>简单聚集函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># 1、distinct</div><div class="line"># db.collection.distinct(key,&lt;query&gt;)</div><div class="line"># 2、count</div><div class="line"># db.collection.find(&lt;query&gt;).count()</div><div class="line"># 3、group，结果集不能大于16M，不能在分片集群上进行操作且不能处理超过10000个唯一键值</div><div class="line"># db.collection.group(&#123;key:..., initial:...,reduce:...[,cond:...]&#125;)</div><div class="line"># eg:</div><div class="line">db.gps_data.group(&#123;</div><div class="line">    key:&#123;_id:1&#125;,</div><div class="line">    cond:&#123;_id:&#123;$lt:3&#125;&#125;,</div><div class="line">    reduce:function(cur,result)&#123;</div><div class="line">        result.count += cur.count;</div><div class="line">    &#125;</div><div class="line">    initial: &#123;count:0&#125;</div><div class="line">&#125;)</div><div class="line"># 统计_id小于3,按照_id分组求value值的和</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="JAVA操作Mongodb"><a href="#JAVA操作Mongodb" class="headerlink" title="JAVA操作Mongodb"></a>JAVA操作Mongodb</h2><ol>
+<li><p>Maven pom.xml配置驱动</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mongodb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mongo-java-driver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<ol>
+<li><p>Mongodb工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MongoDBUtil</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> ThreadLocal&lt;Mongo&gt; mongos = <span class="keyword">new</span> ThreadLocal&lt;Mongo&gt;();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String MONGODB_ADDRESS = <span class="string">"127.0.0.1"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MONGODB_PORT = <span class="number">27017</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String MONGODB_DBNAME = <span class="string">"gps_db"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DB <span class="title">getdb</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> getMongos().getDB(MONGODB_DBNAME);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Mongo <span class="title">getMongos</span><span class="params">()</span> </span>&#123;</div><div class="line">    Mongo mongo = mongos.get();</div><div class="line">    <span class="keyword">if</span> (mongo == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            mongo = <span class="keyword">new</span> Mongo(MONGODB_ADDRESS,MONGODB_PORT);</div><div class="line">            mongos.set(mongo);</div><div class="line">        &#125; <span class="keyword">catch</span> (MongoException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> mongo;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>&#123;</div><div class="line">    Mongo mongo = mongos.get();</div><div class="line">    <span class="keyword">if</span>(mongo!=<span class="keyword">null</span>)&#123;</div><div class="line">        mongo.close();</div><div class="line">        mongos.remove();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 获取集合（表）</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DBCollection <span class="title">getCollection</span><span class="params">(String collection)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> getdb().getCollection(collection);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 插入</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> * <span class="doctag">@param</span> o 插入</div><div class="line"> *</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String collection, DBObject o)</span> </span>&#123;</div><div class="line"></div><div class="line">    getCollection(collection).insert(o);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 批量插入</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> * <span class="doctag">@param</span> list</div><div class="line"> *            插入的列表</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertBatch</span><span class="params">(String collection, List&lt;DBObject&gt; list)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (list == <span class="keyword">null</span> || list.isEmpty()) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    getCollection(collection).insert(list);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 删除</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> * <span class="doctag">@param</span> q</div><div class="line"> *            查询条件</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(String collection, DBObject q)</span> </span>&#123;</div><div class="line"></div><div class="line">    getCollection(collection).remove(q);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 批量删除</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> * <span class="doctag">@param</span> list</div><div class="line"> *            删除条件列表</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteBatch</span><span class="params">(String collection, List&lt;DBObject&gt; list)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (list == <span class="keyword">null</span> || list.isEmpty()) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.size(); i++) &#123;</div><div class="line">        getCollection(collection).remove(list.get(i));</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 更新</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> * <span class="doctag">@param</span> q</div><div class="line"> *            查询条件</div><div class="line"> * <span class="doctag">@param</span> setFields</div><div class="line"> *            更新对象</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(String collection, DBObject q, DBObject setFields)</span> </span>&#123;</div><div class="line"></div><div class="line">    getCollection(collection).updateMulti(q,</div><div class="line">            <span class="keyword">new</span> BasicDBObject(<span class="string">"$set"</span>, setFields));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 查找集合所有对象</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;DBObject&gt; <span class="title">findAll</span><span class="params">(String collection)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> getCollection(collection).find().toArray();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 按顺序查找集合所有对象</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> *            数据集</div><div class="line"> * <span class="doctag">@param</span> orderBy</div><div class="line"> *            排序</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;DBObject&gt; <span class="title">findAll</span><span class="params">(String collection, DBObject orderBy)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> getCollection(collection).find().sort(orderBy)</div><div class="line">            .toArray();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 查找（返回一个对象）</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> * <span class="doctag">@param</span> q</div><div class="line"> *            查询条件</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DBObject <span class="title">findOne</span><span class="params">(String collection, DBObject q)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> getCollection(collection).findOne(q);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 查找（返回一个对象）</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> * <span class="doctag">@param</span> q</div><div class="line"> *            查询条件</div><div class="line"> * <span class="doctag">@param</span> fileds</div><div class="line"> *            返回字段</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DBObject <span class="title">findOne</span><span class="params">(String collection, DBObject q, DBObject fileds)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> getCollection(collection).findOne(q, fileds);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 分页查找集合对象，返回特定字段</div><div class="line"> *</div><div class="line"> * <span class="doctag">@param</span> collection</div><div class="line"> * <span class="doctag">@param</span> q</div><div class="line"> *            查询条件</div><div class="line"> * <span class="doctag">@param</span> fileds</div><div class="line"> *            返回字段</div><div class="line"> * <span class="doctag">@pageNo</span> 第n页</div><div class="line"> * <span class="doctag">@perPageCount</span> 每页记录数</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;DBObject&gt; <span class="title">findLess</span><span class="params">(String collection, DBObject q, DBObject fileds, <span class="keyword">int</span> pageNo,</span></span></div><div class="line">                                      <span class="keyword">int</span> perPageCount) &#123;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> getCollection(collection).find(q, fileds)</div><div class="line">            .skip((pageNo - <span class="number">1</span>) * perPageCount).limit(perPageCount)</div><div class="line">            .toArray();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">getCollectionCount</span><span class="params">(String collection)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> getCollection(collection).getCount();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用mongodb插件  mongodb plugin</p>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">  </div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mongodb<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mongo-java-driver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.slf4j<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>slf4j-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.21<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.cybermkd<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>MongodbPlugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.8.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div></pre></td><td class="code"><pre><div class="line">   <span class="comment">//初始化</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MongoClient <span class="title">init</span><span class="params">()</span></span>&#123;</div><div class="line">    MongoPlugin mongoPlugin=<span class="keyword">new</span> MongoPlugin();</div><div class="line">    mongoPlugin.add(MONGODB_ADDRESS,MONGODB_PORT);</div><div class="line">    mongoPlugin.setDatabase(MONGODB_DBNAME);</div><div class="line">    MongoClient client = mongoPlugin.getMongoClient();</div><div class="line">    MongoKit.INSTANCE.init(client, mongoPlugin.getDatabase());</div><div class="line">    <span class="keyword">return</span>  client;</div><div class="line">&#125;</div><div class="line"><span class="comment">//使用</span></div><div class="line">    <span class="function"><span class="keyword">public</span> JSONArray <span class="title">getCount</span><span class="params">()</span> </span>&#123;</div><div class="line">    JSONArray jsonArray = <span class="keyword">new</span> JSONArray();</div><div class="line">    MongoClient client = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        client = MongoDBUtil.init();</div><div class="line">        MongoQuery query = <span class="keyword">new</span> MongoQuery();</div><div class="line">        query.use(<span class="string">"test"</span>).ascending(<span class="string">"GPSTIME"</span>).find();</div><div class="line">        MongoAggregation aggregation=<span class="keyword">new</span> MongoAggregation(query);</div><div class="line"></div><div class="line">        MongoQuery queryGroupBy = aggregation</div><div class="line">                .group(<span class="keyword">new</span> Document(<span class="string">"CODE"</span>,<span class="string">"$CODE"</span>).append(<span class="string">"GPSDATE"</span>,<span class="string">"$GPSDATE"</span>))</div><div class="line">                .getQuery();</div><div class="line"></div><div class="line">        List&lt;JSONObject&gt; jsonList  = queryGroupBy</div><div class="line">                .projection(<span class="string">"GPSDATE"</span>,<span class="string">"CODE"</span>,<span class="string">"GPSTIME"</span>,<span class="string">"country"</span>,<span class="string">"city"</span>,<span class="string">"province"</span>,<span class="string">"district"</span>,<span class="string">"LNG"</span>,<span class="string">"LAT"</span>)</div><div class="line">                .findAll();</div><div class="line">        System.out.println(jsonList.get(<span class="number">0</span>));</div><div class="line">        jsonArray.add(jsonList.get(<span class="number">0</span>));</div><div class="line">        <span class="keyword">return</span> jsonArray;</div><div class="line">    &#125;<span class="keyword">finally</span> &#123;</div><div class="line">        client.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span>&#123;</div><div class="line">    <span class="keyword">try</span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">           FindIterable&lt;Document&gt; findIterable = collection.find();</div><div class="line">        MongoCursor&lt;Document&gt; mongoCursor = findIterable.iterator();</div><div class="line">        while(mongoCursor.hasNext())&#123;</div><div class="line">            System.out.println(mongoCursor.next());</div><div class="line">        &#125;</div><div class="line">        DBObject dbObject = new BasicDBObject("province","浙江省");</div><div class="line">        System.out.print(MongoDBUtil.findOne("test",dbObject).toString());</div><div class="line"></div><div class="line">        // 连接到 mongodb 服务</div><div class="line">        MongoClient mongoClient = new MongoClient( "localhost" , 27017 );</div><div class="line"></div><div class="line">        // 连接到数据库</div><div class="line">        MongoDatabase mongoDatabase = mongoClient.getDatabase("test");</div><div class="line">        MongoCollection&lt;Document&gt; collection = mongoDatabase.getCollection("test");</div><div class="line">        System.out.println(collection.count());</div><div class="line">        BasicDBObject key =  new BasicDBObject("CODE",true);*/</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">/*</span></div><div class="line">        System.out.println(aggregation1</div><div class="line">                .group(new Document("CODE","$CODE").append("GPSDATE","$GPSDATE"))</div><div class="line">                .aggregate());</div><div class="line"></div><div class="line">        query.use("test").ascending("GPSTIME");</div><div class="line">        MongoAggregation aggregation=new MongoAggregation(query);</div><div class="line">        System.out.print(JSON.toJSONString(</div><div class="line">                aggregation</div><div class="line">                        .include("CODE","GPSDATE","province")</div><div class="line">                        .group("$CODE",new MongoAccumulator().max("GPSTIME","$GPSTIME"))</div><div class="line">                        .aggregate()));</div><div class="line">        System.out.print(JSON.toJSONString(</div><div class="line">                aggregation</div><div class="line">                        .include("CODE","GPSDATE","province")</div><div class="line">                        .group("$CODE",new MongoAccumulator().min("GPSTIME","$GPSTIME"))</div><div class="line">                        .aggregate()));*/</div><div class="line">        <span class="comment">/*JSON.toJSONString(</span></div><div class="line">                aggregation</div><div class="line">                        .group("$CODE",new MongoAccumulator().max("GPSTIME","$GPSTIME"))</div><div class="line">                        .aggregate())*/</div><div class="line"></div><div class="line">        MongoPlugin mongoPlugin=<span class="keyword">new</span> MongoPlugin();</div><div class="line">        mongoPlugin.add(<span class="string">"127.0.0.1"</span>,<span class="number">27017</span>);</div><div class="line">        mongoPlugin.setDatabase(<span class="string">"test"</span>);</div><div class="line">        MongoClient client = mongoPlugin.getMongoClient();</div><div class="line">        MongoKit.INSTANCE.init(client, mongoPlugin.getDatabase());</div><div class="line">        MongoQuery query = <span class="keyword">new</span> MongoQuery();</div><div class="line">        query.use(<span class="string">"test"</span>).<span class="comment">/*eq("CODE","Y115浙B92236").*/</span>ascending(<span class="string">"GPSTIME"</span>).find();</div><div class="line">        MongoAggregation aggregation=<span class="keyword">new</span> MongoAggregation(query);</div><div class="line">        System.out.print(JSON.toJSONString(aggregation</div><div class="line">                .include(<span class="string">"GPSDATE"</span>,<span class="string">"CODE"</span>,<span class="string">"GPSTIME"</span>,<span class="string">"country"</span>,<span class="string">"city"</span>,<span class="string">"province"</span>,<span class="string">"district"</span>,<span class="string">"LNG"</span>,<span class="string">"LAT"</span>)</div><div class="line">                .projection()</div><div class="line">                <span class="comment">//.pipeline(new Document("$match",new Document("provice", "浙江省")))</span></div><div class="line">                .pipeline(<span class="keyword">new</span> Document(<span class="string">"$group"</span>,</div><div class="line">                        <span class="keyword">new</span> Document(<span class="string">"_id"</span>,<span class="keyword">new</span> Document(<span class="string">"province"</span>, <span class="string">"$province"</span>)</div><div class="line">                                .append(<span class="string">"GPSDATE"</span>,<span class="string">"$GPSDATE"</span>))</div><div class="line">                                .append(<span class="string">"total"</span>,<span class="keyword">new</span> Document(<span class="string">"$sum"</span>,<span class="number">1</span>))))</div><div class="line"></div><div class="line">                .out(<span class="string">"output"</span>)</div><div class="line">                .aggregate()));</div><div class="line"></div><div class="line">       <span class="comment">/* MongoQuery queryGroupBy = aggregation</span></div><div class="line">                .group(new Document("CODE","$CODE").append("GPSDATE","$GPSDATE"))</div><div class="line">                .getQuery();</div><div class="line"></div><div class="line">        List&lt;JSONObject&gt; jsonList  = queryGroupBy</div><div class="line">                .projection("GPSDATE","CODE","GPSTIME","country","city","province","district","LNG","LAT")</div><div class="line">                .findAll();</div><div class="line">        System.out.println(jsonList.get(0));*/</div><div class="line">        client.close();</div><div class="line"></div><div class="line"></div><div class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">        System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">    &#125;</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String args[] )</span></span>&#123;</div><div class="line">    <span class="keyword">try</span>&#123;</div><div class="line">        <span class="comment">/*</span></div><div class="line">           FindIterable&lt;Document&gt; findIterable = collection.find();</div><div class="line">        MongoCursor&lt;Document&gt; mongoCursor = findIterable.iterator();</div><div class="line">        while(mongoCursor.hasNext())&#123;</div><div class="line">            System.out.println(mongoCursor.next());</div><div class="line">        &#125;</div><div class="line">        DBObject dbObject = new BasicDBObject("province","浙江省");</div><div class="line">        System.out.print(MongoDBUtil.findOne("test",dbObject).toString());</div><div class="line"></div><div class="line">        // 连接到 mongodb 服务</div><div class="line">        MongoClient mongoClient = new MongoClient( "localhost" , 27017 );</div><div class="line"></div><div class="line">        // 连接到数据库</div><div class="line">        MongoDatabase mongoDatabase = mongoClient.getDatabase("test");</div><div class="line">        MongoCollection&lt;Document&gt; collection = mongoDatabase.getCollection("test");</div><div class="line">        System.out.println(collection.count());</div><div class="line">        BasicDBObject key =  new BasicDBObject("CODE",true);*/</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">        <span class="comment">/*</span></div><div class="line">        System.out.println(aggregation1</div><div class="line">                .group(new Document("CODE","$CODE").append("GPSDATE","$GPSDATE"))</div><div class="line">                .aggregate());</div><div class="line"></div><div class="line">        query.use("test").ascending("GPSTIME");</div><div class="line">        MongoAggregation aggregation=new MongoAggregation(query);</div><div class="line">        System.out.print(JSON.toJSONString(</div><div class="line">                aggregation</div><div class="line">                        .include("CODE","GPSDATE","province")</div><div class="line">                        .group("$CODE",new MongoAccumulator().max("GPSTIME","$GPSTIME"))</div><div class="line">                        .aggregate()));</div><div class="line">        System.out.print(JSON.toJSONString(</div><div class="line">                aggregation</div><div class="line">                        .include("CODE","GPSDATE","province")</div><div class="line">                        .group("$CODE",new MongoAccumulator().min("GPSTIME","$GPSTIME"))</div><div class="line">                        .aggregate()));*/</div><div class="line">        <span class="comment">/*JSON.toJSONString(</span></div><div class="line">                aggregation</div><div class="line">                        .group("$CODE",new MongoAccumulator().max("GPSTIME","$GPSTIME"))</div><div class="line">                        .aggregate())*/</div><div class="line"></div><div class="line">        MongoPlugin mongoPlugin=<span class="keyword">new</span> MongoPlugin();</div><div class="line">        mongoPlugin.add(<span class="string">"127.0.0.1"</span>,<span class="number">27017</span>);</div><div class="line">        mongoPlugin.setDatabase(<span class="string">"test"</span>);</div><div class="line">        MongoClient client = mongoPlugin.getMongoClient();</div><div class="line">        MongoKit.INSTANCE.init(client, mongoPlugin.getDatabase());</div><div class="line">        MongoQuery query = <span class="keyword">new</span> MongoQuery();</div><div class="line">        query.use(<span class="string">"test"</span>).<span class="comment">/*eq("CODE","Y115浙B92236").*/</span>ascending(<span class="string">"GPSTIME"</span>).find();</div><div class="line">        MongoAggregation aggregation=<span class="keyword">new</span> MongoAggregation(query);</div><div class="line">        System.out.print(JSON.toJSONString(aggregation</div><div class="line">                .include(<span class="string">"GPSDATE"</span>,<span class="string">"CODE"</span>,<span class="string">"GPSTIME"</span>,<span class="string">"country"</span>,<span class="string">"city"</span>,<span class="string">"province"</span>,<span class="string">"district"</span>,<span class="string">"LNG"</span>,<span class="string">"LAT"</span>)</div><div class="line">                .projection()</div><div class="line">                <span class="comment">//.pipeline(new Document("$match",new Document("provice", "浙江省")))</span></div><div class="line">                .pipeline(<span class="keyword">new</span> Document(<span class="string">"$group"</span>,</div><div class="line">                        <span class="keyword">new</span> Document(<span class="string">"_id"</span>,<span class="keyword">new</span> Document(<span class="string">"province"</span>, <span class="string">"$province"</span>)</div><div class="line">                                .append(<span class="string">"GPSDATE"</span>,<span class="string">"$GPSDATE"</span>))</div><div class="line">                                .append(<span class="string">"total"</span>,<span class="keyword">new</span> Document(<span class="string">"$sum"</span>,<span class="number">1</span>))))</div><div class="line"></div><div class="line">                .out(<span class="string">"output"</span>)</div><div class="line">                .aggregate()));</div><div class="line"></div><div class="line">       <span class="comment">/* MongoQuery queryGroupBy = aggregation</span></div><div class="line">                .group(new Document("CODE","$CODE").append("GPSDATE","$GPSDATE"))</div><div class="line">                .getQuery();</div><div class="line"></div><div class="line">        List&lt;JSONObject&gt; jsonList  = queryGroupBy</div><div class="line">                .projection("GPSDATE","CODE","GPSTIME","country","city","province","district","LNG","LAT")</div><div class="line">                .findAll();</div><div class="line">        System.out.println(jsonList.get(0));*/</div><div class="line">        client.close();</div><div class="line"></div><div class="line"></div><div class="line">    &#125;<span class="keyword">catch</span>(Exception e)&#123;</div><div class="line">        System.err.println( e.getClass().getName() + <span class="string">": "</span> + e.getMessage() );</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><a href="http://docs.mongoing.com/manual-zh/aggregation.html" target="_blank" rel="external">mongodb api文档教程</a><br><a href="https://t-baby.gitbooks.io/mongodb-plugin/content/%E5%9C%B0%E7%90%86%E4%BD%8D%E7%BD%AE.html" target="_blank" rel="external">mongodb plugin 插件使用教程</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><pre><code>*第一次接触nosql数据库，还有很多需要去学习东西，在java上去开发还不是那么流畅，插件的使用还不是很顺畅，但是运用起来还是感觉很舒服。
+在数据量打的情况下，只做数据处理的前提，最好是先在数据库去将数据处理好，再用java mongodb api 去调用数据库，获取处理好的数据，避免的在逻辑层去处理大量的数据，这样的性能效率才能高*
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mongodb-plugin/" rel="tag"># mongodb-plugin</a>
+          
+            <a href="/tags/nosql/" rel="tag"># nosql</a>
+          
+            <a href="/tags/mongodb-java/" rel="tag"># mongodb-java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/08/mybatis源码分析/" rel="next" title="mybatis-配置加载-源码分析">
+                <i class="fa fa-chevron-left"></i> mybatis-配置加载-源码分析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/12/15/mongodb-1/"
+     data-title="mongodb-1"
+     data-content=""
+     data-url="http://honeyz.github.io/2016/12/15/mongodb-1/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/15/mongodb-1/"
+           data-title="mongodb-1" data-url="http://honeyz.github.io/2016/12/15/mongodb-1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/czx.jpg"
+               alt="Honeycc" />
+          <p class="site-author-name" itemprop="name">Honeycc</p>
+          <p class="site-description motion-element" itemprop="description">有些事情好像早已经注定 比如和你</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1860668180/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/honeycc_vv" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/cc_vv/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-share-alt"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vvczx.az" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#mongodb进程"><span class="nav-number">1.</span> <span class="nav-text">mongodb进程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb-数据库操作"><span class="nav-number"></span> <span class="nav-text">mongodb 数据库操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JAVA操作Mongodb"><span class="nav-number"></span> <span class="nav-text">JAVA操作Mongodb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number"></span> <span class="nav-text">总结</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Honeycc</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"honeyc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
