@@ -1,0 +1,951 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,JQuery," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="访问DOM三种方式123document.getElementById()document.getElementsByTagName()document.getElementsByClassName()
+JQuery选择器12345678910111213141516171819(1).基本选择器 $(&quot;*&quot;)  $(&quot;.class&quot;) $(&quot;#id&quot;)  $(&quot;div&quot;)  $(&quot;div.cla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS+JQuery基础">
+<meta property="og:url" content="http://honeyz.github.io/2016/12/25/JS-JQuery基础/index.html">
+<meta property="og:site_name" content="Honeyc's Blog">
+<meta property="og:description" content="访问DOM三种方式123document.getElementById()document.getElementsByTagName()document.getElementsByClassName()
+JQuery选择器12345678910111213141516171819(1).基本选择器 $(&quot;*&quot;)  $(&quot;.class&quot;) $(&quot;#id&quot;)  $(&quot;div&quot;)  $(&quot;div.cla">
+<meta property="og:updated_time" content="2017-01-15T12:47:24.749Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS+JQuery基础">
+<meta name="twitter:description" content="访问DOM三种方式123document.getElementById()document.getElementsByTagName()document.getElementsByClassName()
+JQuery选择器12345678910111213141516171819(1).基本选择器 $(&quot;*&quot;)  $(&quot;.class&quot;) $(&quot;#id&quot;)  $(&quot;div&quot;)  $(&quot;div.cla">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://honeyz.github.io/2016/12/25/JS-JQuery基础/"/>
+
+
+
+
+
+  <title> JS+JQuery基础 | Honeyc's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Honeyc's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">code and life</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+
+
+<!--
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="http://music.163.com/outchain/player?type=2&id=426881506&auto=1&height=66"></iframe> -->
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://honeyz.github.io/2016/12/25/JS-JQuery基础/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Honeycc">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/czx.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Honeyc's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Honeyc's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JS+JQuery基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-25T20:46:01+08:00">
+                2016-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端技术/" itemprop="url" rel="index">
+                    <span itemprop="name">前端技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/25/JS-JQuery基础/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/25/JS-JQuery基础/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="访问DOM三种方式"><a href="#访问DOM三种方式" class="headerlink" title="访问DOM三种方式"></a>访问DOM三种方式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.getElementById()</div><div class="line"><span class="built_in">document</span>.getElementsByTagName()</div><div class="line"><span class="built_in">document</span>.getElementsByClassName()</div></pre></td></tr></table></figure>
+<h4 id="JQuery选择器"><a href="#JQuery选择器" class="headerlink" title="JQuery选择器"></a>JQuery选择器</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">(<span class="number">1</span>).基本选择器 </div><div class="line">$(<span class="string">"*"</span>)  $(<span class="string">".class"</span>) $(<span class="string">"#id"</span>)  $(<span class="string">"div"</span>)  $(<span class="string">"div.class"</span>) </div><div class="line">(<span class="number">2</span>).属性选择器   </div><div class="line">$(<span class="string">"input[value=0]"</span>) $(<span class="string">"p[class*=content]"</span>),$(<span class="string">"p[id][class$=Menu]"</span>)</div><div class="line">(<span class="number">3</span>).内容选择器</div><div class="line">$(<span class="string">"div:contains('username')"</span>) , $(<span class="string">"div:has(span)"</span>)</div><div class="line">(<span class="number">4</span>).层次选择器</div><div class="line">$(<span class="string">"div span"</span>)祖先为div，$(<span class="string">"div.menu &gt; span"</span>)父亲为span</div><div class="line">$(<span class="string">"prev + next"</span>) 紧跟在prev后面与prev同辈的next</div><div class="line">$(<span class="string">"#menu ~ div"</span>) 与id为menu后面的同辈的div</div><div class="line">(<span class="number">5</span>).表单选择器 </div><div class="line">$(<span class="string">"input:checked"</span>)</div><div class="line">(<span class="number">6</span>).可视性选择器</div><div class="line">$(<span class="string">"div:visible"</span>),$(<span class="string">"div:hidden"</span>)</div><div class="line">(<span class="number">7</span>).筛选选择器</div><div class="line">$(<span class="string">"tr:even"</span>):保留索引为偶数的</div><div class="line">$(<span class="string">"tr:odd"</span>):保留索引为奇数的</div><div class="line">$(<span class="string">"li:first"</span>):保留第一个</div><div class="line">$(<span class="string">"li:last"</span>),$(<span class="string">"div:eq(5)"</span>),$(<span class="string">"li:gt(1)"</span>)</div></pre></td></tr></table></figure>
+<h4 id="筛选JQuery对象标识的结果"><a href="#筛选JQuery对象标识的结果" class="headerlink" title="筛选JQuery对象标识的结果"></a>筛选JQuery对象标识的结果</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">.eq(index)</div><div class="line">$(<span class="string">"div"</span>).eq()</div><div class="line"></div><div class="line">.filter(selector or element or <span class="function"><span class="keyword">function</span>(<span class="params">index</span>) <span class="title">or</span> <span class="title">index</span> <span class="title">or</span> <span class="title">object</span>)</span></div><div class="line"><span class="title">$</span>(<span class="params"><span class="string">"option"</span></span>).<span class="title">filter</span>(<span class="params">function(index</span>)&#123;<span class="keyword">return</span> (<span class="keyword">this</span>.value&gt;<span class="number">5</span>); &#125;);</div><div class="line"></div><div class="line">.first()  .last()  .has(selector or element)  .not()   .slice()</div><div class="line">上下级：.children([selector])  .parent([selector]) .parents([selector])</div><div class="line">平级：.prev() .prevAll()  .siblings([selector])</div><div class="line">查找：.find(selector or element or object)</div><div class="line">.next([selector]) .nextAll()</div><div class="line"></div><div class="line">遍历：.each(<span class="function"><span class="keyword">function</span>(<span class="params">inedx,Element</span>)) .<span class="title">map</span>(<span class="params">function</span>)</span></div><div class="line"><span class="title">eg</span>: <span class="title">$</span>(<span class="params"><span class="string">"p"</span></span>).<span class="title">each</span>(<span class="params">function(index</span>)&#123;$(<span class="keyword">this</span>).html(index);&#125;)</div><div class="line">.map()返回的是一个新的jquery对象，包括每次迭代返回的值,get()返回数组，join()拼接</div><div class="line"><span class="keyword">var</span> listValues = $(<span class="string">"li"</span>).map(<span class="function"><span class="keyword">function</span>(<span class="params">index</span>)</span>&#123;</div><div class="line"><span class="keyword">return</span> $(<span class="keyword">this</span>).html();&#125;).get().join(<span class="string">","</span>);</div></pre></td></tr></table></figure>
+<h4 id="浏览器事件"><a href="#浏览器事件" class="headerlink" title="浏览器事件"></a>浏览器事件</h4><blockquote>
+<p>流程： 发生物理时间-&gt;在浏览器中触发事件-&gt;浏览器创建事件对象-&gt;调用用户定义的事件处理程序<br>事件处理过程分为三个阶段：捕获阶段 目标阶段 冒泡阶段<br>(1).初始化<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">js:&lt;body onload="function()"&gt;</div><div class="line">jquery:$(document).ready(funtion()&#123;&#125;);$(document).load(function()&#123;//其他资源都加载完再加载&#125;);$(funcion()&#123;&#125;);</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>(2).js对元素进行事件监听 .addEventListener(‘click’,function())<br>(3).使用jQuery指定事件处理程序<br>    on(events,[selector],[data],hander(eventObject))<br>    on(events-map,[selector],[data])<br>    off(events,[selector],hander(eventObject))<br>    off(events-map,[selector])<br>    辅助函数：<br>    obj.click(dataObj,function handler(e){})<br>    obj.hover(function enterhandler(e){},function leaveHandler(e){])<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> eg:</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">clickHandler</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">     $(<span class="string">"#"</span>+edata.objId),html(e.target.id+<span class="string">"says "</span>+e.data.answer+<span class="string">"at x position:"</span> + e.screenX);</div><div class="line">&#125;</div><div class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     $(<span class="string">"#div1"</span>).on(&#123;<span class="string">"click"</span>:clickHandler&#125;,</div><div class="line">                     &#123;<span class="string">"objId"</span>:<span class="string">"heading"</span>,<span class="string">"answer"</span>:<span class="string">"yes"</span>&#125;);</div><div class="line">     $(<span class="built_in">document</span>).on(<span class="string">"click"</span>,<span class="string">"#div2"</span>,&#123;<span class="string">"objId"</span>:<span class="string">"heading"</span>,<span class="string">"answer"</span>:<span class="string">"no"</span>&#125;,clickHandler);</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>(4).手工触发事件<br>js:<br>    obj.click() –&gt;三个步骤 a = document.createEvent(“MouseEvnets”); a.initClick(“Click”);obj.dispatchEvent(clickEvent);<br>jquery:<br>    $(“span”).click()<br>    $(“.checkbox”).trigger(“click”)<br>    $(“input.bigText”).trigger({“type”:”keypress”,”charCode”:13})</p>
+<p>(5).创建自定义事件<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">js: </div><div class="line"><span class="keyword">var</span> myEvent = <span class="built_in">document</span>.createEvent(<span class="string">"CustomEvent"</span>);</div><div class="line">myEvent.initCustomEvent(</div><div class="line"><span class="string">"worldEnds"</span>,<span class="literal">true</span>,<span class="literal">false</span>,&#123;<span class="string">'fire'</span>:<span class="literal">false</span>,<span class="string">'ice'</span>:<span class="literal">false</span>,<span class="string">'time'</span>:<span class="keyword">new</span> <span class="built_in">Date</span>()&#125;);</div><div class="line">通过对DOM对象调用方法dispatchEvent()触发它</div><div class="line"><span class="keyword">var</span> obj = <span class="built_in">document</span>.getElementById(<span class="string">"#notify"</span>);</div><div class="line">obj.dispatchEvent(myEvent);</div><div class="line">通过addEventListener()</div><div class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"worldEnds"</span>,endOfWorldHandler,<span class="literal">false</span>);</div><div class="line"></div><div class="line">JQuery:</div><div class="line"><span class="keyword">var</span> createEvent = $.Event(<span class="string">"worldEnds"</span>,&#123;<span class="string">'fire'</span>:<span class="literal">false</span>,<span class="string">'ice'</span>:<span class="literal">false</span>,<span class="string">'time'</span>:<span class="keyword">new</span> <span class="built_in">Date</span>()&#125;)</div><div class="line">$.event.trigger(cystEvent);</div><div class="line">$(<span class="built_in">document</span>).on(<span class="string">"worldEnds"</span>,endOfWorldHandler)</div></pre></td></tr></table></figure></p>
+<p>(6).ajax跨域<br>1、为了复用，减少重复开发，单独开发了一个用户权限管理系统，共其他系统获取认证与授权信息，暂且称之为A系统；调用A系统以B为例。在B系统中用ajax调用A系统系统的接口(数据格式为json)，当时特别困惑，在A系统中访问相应的url可正常回返json数据，但是在B系统中使用ajax请求同样的url则一点儿反应都没有，好像什么都没有发生一样。可能是ajax跨域问题，于是就将这个问题当做跨域问题来解决了。jQuery的ajax有jsonp这样的属性可以用来解决跨域的问题。<br>找到一种解决方式</p>
+<blockquote>
+<p>jsonp:是数据格式JSON的一种“使用模式”，可以让网页从别的网域要数据。另一个解决这个问题的新方法是跨来源资源共享。<a href="https://zh.wikipedia.org/wiki/JSONP" target="_blank" rel="external">维基百科jsonp</a></p>
+</blockquote>
+<p>首先来看看在页面中如何使用jQuery的ajax解决跨域问题的简单版：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">$(document).ready(function()&#123;</div><div class="line">  var url='http://localhost:8080/WorkGroupManagment/open/getGroupById"</div><div class="line">      +"?id=1&amp;callback=?';</div><div class="line">  $.ajax(&#123;</div><div class="line">    url:url,</div><div class="line">    dataType:'jsonp',</div><div class="line">    processData: false, </div><div class="line">    type:'get',</div><div class="line">    success:function(data)&#123;</div><div class="line">      alert(data.name);</div><div class="line">    &#125;,</div><div class="line">    error:function(XMLHttpRequest, textStatus, errorThrown) &#123;</div><div class="line">      alert(XMLHttpRequest.status);</div><div class="line">      alert(XMLHttpRequest.readyState);</div><div class="line">      alert(textStatus);</div><div class="line">    &#125;&#125;);</div><div class="line">  &#125;);</div></pre></td></tr></table></figure></p>
+<p>服务器端：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/getGroupById"</span>)</div><div class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getGroupById</span><span class="params">(@RequestParam(<span class="string">"id"</span>)</span> Long id,</span></div><div class="line">      HttpServletRequest request, HttpServletResponse response)</div><div class="line">      <span class="keyword">throws</span> IOException &#123;</div><div class="line">    String callback = request.getParameter(<span class="string">"callback"</span>);</div><div class="line">    ReturnObject result = <span class="keyword">null</span>;</div><div class="line">    Group group = <span class="keyword">null</span>;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      group = groupService.getGroupById(id);</div><div class="line">      result = <span class="keyword">new</span> ReturnObject(group, <span class="string">"获取成功"</span>, Constants.RESULT_SUCCESS);</div><div class="line">    &#125; <span class="keyword">catch</span> (BusinessException e) &#123;</div><div class="line">      e.printStackTrace();</div><div class="line">      result = <span class="keyword">new</span> ReturnObject(group, <span class="string">"获取失败"</span>, Constants.RESULT_FAILED);</div><div class="line">    &#125;</div><div class="line">    String json = JsonConverter.bean2Json(result);</div><div class="line">    response.setContentType(<span class="string">"text/html"</span>);</div><div class="line">    response.setCharacterEncoding(<span class="string">"utf-8"</span>);</div><div class="line">    PrintWriter out = response.getWriter();</div><div class="line">    out.print(callback + <span class="string">"("</span> + json + <span class="string">")"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#jsonp格式：</div><div class="line">callback(&#123;</div><div class="line">    "message":"获取成功",</div><div class="line">    "state":"1",</div><div class="line">    "result":&#123;"name":"工作组1","id":1,"description":"11"&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>2、把<figure class="highlight plain"><figcaption><span><script>元素运行，从src里URL回传的必须是可运行的JavaScript。在JSONP的使用模式里，该URL回传的是由函数调用包起来的动态生成JSON。</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">```javascript</div><div class="line">&lt;script type=&quot;text/javascript&quot;</div><div class="line">         src=&quot;http://server2.example.com/RetrieveUser?UserId=1823&amp;jsonp=parseResponse&quot;&gt;</div><div class="line">&lt;/script&gt;</div><div class="line"> #  返回</div><div class="line"> parseResponse(&#123;&quot;Name&quot;: &quot;小明&quot;, &quot;Id&quot; : 1823, &quot;Rank&quot;: 7&#125;)</div></pre></td></tr></table></figure></p>
+<p>(7).回调和闭包</p>
+<blockquote>
+<p>回调定义:回调函数就是一个通过函数指针调用的函数。如果你把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用为调用它所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。</p>
+</blockquote>
+<p>1.AJAX的异步加载时用到了回调函数的<br>2.同步中的使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> func1=<span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</div><div class="line">    <span class="comment">//do something.</span></div><div class="line">    (callback &amp;&amp; <span class="keyword">typeof</span>(callback) === <span class="string">"function"</span>) &amp;&amp; callback(); <span class="comment">//检测函数存在且是一个函数然后再调用</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">func1(func2);</div><div class="line">    <span class="keyword">var</span> func2=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>闭包定义:定义在一个函数内部的函数，但是呢，这个里面的函数他访问了他外面的那个函数的变量。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">x</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> tmp = <span class="number">3</span>;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">y</span>) </span>&#123;</div><div class="line">        alert(x + y + (++tmp));</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> bar = foo(<span class="number">2</span>); <span class="comment">// bar 现在是一个闭包</span></div><div class="line">bar(<span class="number">10</span>); <span class="comment">//16 第一次调用</span></div><div class="line">bar(<span class="number">10</span>);  <span class="comment">//17   第二次调用</span></div><div class="line"><span class="comment">//在foo函数中已经形成了一个闭包，这就意味着，只要bar函不死，垃圾回收机制就不敢去动foo函数，而此时，我们的bar函数所指向的那个匿名函数就可以一直去访问那个tmp和x,且每次调用，都会得到上一次被自增了以后的tmp</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+</script></span></figcaption></figure></p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/JQuery/" rel="tag"># JQuery</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/21/基于角色的权限控制-Spring-Security/" rel="next" title="基于角色的权限控制+Spring Security">
+                <i class="fa fa-chevron-left"></i> 基于角色的权限控制+Spring Security
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/12/25/JS-JQuery基础/"
+     data-title="JS+JQuery基础"
+     data-content=""
+     data-url="http://honeyz.github.io/2016/12/25/JS-JQuery基础/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/25/JS-JQuery基础/"
+           data-title="JS+JQuery基础" data-url="http://honeyz.github.io/2016/12/25/JS-JQuery基础/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/czx.jpg"
+               alt="Honeycc" />
+          <p class="site-author-name" itemprop="name">Honeycc</p>
+          <p class="site-description motion-element" itemprop="description">有些事情好像早已经注定 比如和你</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1860668180/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://git.oschina.net/honeycc_vv" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/cc_vv/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-share-alt"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/vvczx.az" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#访问DOM三种方式"><span class="nav-number">1.</span> <span class="nav-text">访问DOM三种方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JQuery选择器"><span class="nav-number">2.</span> <span class="nav-text">JQuery选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#筛选JQuery对象标识的结果"><span class="nav-number">3.</span> <span class="nav-text">筛选JQuery对象标识的结果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器事件"><span class="nav-number">4.</span> <span class="nav-text">浏览器事件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Honeycc</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"honeyc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
