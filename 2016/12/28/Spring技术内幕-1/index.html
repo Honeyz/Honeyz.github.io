@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="hadoop,idea," />
+  <meta name="keywords" content="Spring,Spring bean," />
 
 
 
@@ -84,27 +84,22 @@
 
 
 
-<meta name="description" content="在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用
-1.idea创建maven工程，目录结构如下
+<meta name="description" content="Spring-4种关键策略(1).基于POJO的轻量级和最小侵入性编程(2).通过依赖注入喝面向接口实现松耦合(3).基于切面和惯例进行声明式编程(4).通过切面和模板减少样板式代码
 
-input 文件下放程序需要读取的文件，每个程序对应input下一个文件夹，如wordcount，words文件为com.zju.czx.WordCount 要读取的文">
+依赖注入(DI):对象的依赖关系由负责协调系统中各个对象的第三方组件在创建对象时设定。对象无需自行创建或者管理它们的依赖关系-依赖关系将被自动注入到需要它们的对象中去。面向切面(AOP):分离关注点，每个组件各负责">
 <meta property="og:type" content="article">
-<meta property="og:title" content="idea下使用脚本在远程hadoop环境去执行和交互">
-<meta property="og:url" content="http://honeyz.github.io/2016/12/05/idea下使用脚本在远程hadoop环境去执行和交互/index.html">
+<meta property="og:title" content="Spring技术内幕-1">
+<meta property="og:url" content="http://honeyz.github.io/2016/12/28/Spring技术内幕-1/index.html">
 <meta property="og:site_name" content="Honeyc's Blog">
-<meta property="og:description" content="在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用
-1.idea创建maven工程，目录结构如下
+<meta property="og:description" content="Spring-4种关键策略(1).基于POJO的轻量级和最小侵入性编程(2).通过依赖注入喝面向接口实现松耦合(3).基于切面和惯例进行声明式编程(4).通过切面和模板减少样板式代码
 
-input 文件下放程序需要读取的文件，每个程序对应input下一个文件夹，如wordcount，words文件为com.zju.czx.WordCount 要读取的文">
-<meta property="og:image" content="http://oh9zj3zsi.bkt.clouddn.com/blog_2_1.png">
-<meta property="og:updated_time" content="2016-12-05T14:32:24.394Z">
+依赖注入(DI):对象的依赖关系由负责协调系统中各个对象的第三方组件在创建对象时设定。对象无需自行创建或者管理它们的依赖关系-依赖关系将被自动注入到需要它们的对象中去。面向切面(AOP):分离关注点，每个组件各负责">
+<meta property="og:updated_time" content="2017-01-17T13:23:41.409Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="idea下使用脚本在远程hadoop环境去执行和交互">
-<meta name="twitter:description" content="在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用
-1.idea创建maven工程，目录结构如下
+<meta name="twitter:title" content="Spring技术内幕-1">
+<meta name="twitter:description" content="Spring-4种关键策略(1).基于POJO的轻量级和最小侵入性编程(2).通过依赖注入喝面向接口实现松耦合(3).基于切面和惯例进行声明式编程(4).通过切面和模板减少样板式代码
 
-input 文件下放程序需要读取的文件，每个程序对应input下一个文件夹，如wordcount，words文件为com.zju.czx.WordCount 要读取的文">
-<meta name="twitter:image" content="http://oh9zj3zsi.bkt.clouddn.com/blog_2_1.png">
+依赖注入(DI):对象的依赖关系由负责协调系统中各个对象的第三方组件在创建对象时设定。对象无需自行创建或者管理它们的依赖关系-依赖关系将被自动注入到需要它们的对象中去。面向切面(AOP):分离关注点，每个组件各负责">
 
 
 
@@ -132,13 +127,13 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
 
 
 
-  <link rel="canonical" href="http://honeyz.github.io/2016/12/05/idea下使用脚本在远程hadoop环境去执行和交互/"/>
+  <link rel="canonical" href="http://honeyz.github.io/2016/12/28/Spring技术内幕-1/"/>
 
 
 
 
 
-  <title> idea下使用脚本在远程hadoop环境去执行和交互 | Honeyc's Blog </title>
+  <title> Spring技术内幕-1 | Honeyc's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -296,7 +291,7 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://honeyz.github.io/2016/12/05/idea下使用脚本在远程hadoop环境去执行和交互/">
+  <link itemprop="mainEntityOfPage" href="http://honeyz.github.io/2016/12/28/Spring技术内幕-1/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Honeycc">
@@ -320,7 +315,7 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
             
             
               
-                idea下使用脚本在远程hadoop环境去执行和交互
+                Spring技术内幕-1
               
             
           </h1>
@@ -333,8 +328,8 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-05T22:09:19+08:00">
-                2016-12-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-28T21:22:28+08:00">
+                2016-12-28
               </time>
             
 
@@ -352,8 +347,8 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hadoop/" itemprop="url" rel="index">
-                    <span itemprop="name">Hadoop</span>
+                  <a href="/categories/Spring/" itemprop="url" rel="index">
+                    <span itemprop="name">Spring</span>
                   </a>
                 </span>
 
@@ -367,8 +362,8 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/05/idea下使用脚本在远程hadoop环境去执行和交互/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/05/idea下使用脚本在远程hadoop环境去执行和交互/" itemprop="commentCount"></span>
+                <a href="/2016/12/28/Spring技术内幕-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/28/Spring技术内幕-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -399,15 +394,24 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
       
 
       
-        <p><strong>在ideal下创建maven工程，编写mapreduce程序，调用虚拟机上hadoop分布式执行，避免每次都要进行打包，将文件、jar包上传到主节点master上，在主节点上再去调用</strong></p>
-<h2 id="1-idea创建maven工程，目录结构如下"><a href="#1-idea创建maven工程，目录结构如下" class="headerlink" title="1.idea创建maven工程，目录结构如下"></a>1.idea创建maven工程，目录结构如下</h2><p><img src="http://oh9zj3zsi.bkt.clouddn.com/blog_2_1.png" alt="maven目录结构"></p>
+        <h3 id="Spring-4种关键策略"><a href="#Spring-4种关键策略" class="headerlink" title="Spring-4种关键策略"></a>Spring-4种关键策略</h3><p>(1).基于POJO的轻量级和最小侵入性编程<br>(2).通过依赖注入喝面向接口实现松耦合<br>(3).基于切面和惯例进行声明式编程<br>(4).通过切面和模板减少样板式代码</p>
 <blockquote>
-<p>input 文件下放程序需要读取的文件，每个程序对应input下一个文件夹，如wordcount，words文件为com.zju.czx.WordCount 要读取的文件;<br>output 下为程序执行完成从hdfs上放下的文件<br>target 存放整个项目的打包生成的jar<br>src 存放mapreduce的程序<br>shell 存放执行脚本，通过脚本来对虚拟机上进行操作</p>
+<p>依赖注入(DI):<em>对象的依赖关系由负责协调系统中各个对象的第三方组件在创建对象时设定。对象无需自行创建或者管理它们的依赖关系-依赖关系将被自动注入到需要它们的对象中去。</em><br>面向切面(AOP):<em>分离关注点，每个组件各负责一块特定的功能，诸如日志、事务管理和安全。横切关注点:跨越系统多个组件，将服务模块化，通过声明的方式不去影响系统原有的核心功能，高内聚。</em></p>
 </blockquote>
-<p><em>pom.xml</em> 使用的是hadoop版本1.2.1.<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></div><div class="line">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></div><div class="line">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.zju.czx<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>remoteHadoop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="name">packaging</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>remoteHadoop<span class="tag">&lt;/<span class="name">name</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="name">url</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">project.build.sourceEncoding</span>&gt;</span>UTF-8<span class="tag">&lt;/<span class="name">project.build.sourceEncoding</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">hadoop.version</span>&gt;</span>1.2.1<span class="tag">&lt;/<span class="name">hadoop.version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hadoop-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;hadoop.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"></div><div class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h2 id="2-在idea这个开发环境的机器上，与master设置ssh的免密码登录"><a href="#2-在idea这个开发环境的机器上，与master设置ssh的免密码登录" class="headerlink" title="2.在idea这个开发环境的机器上，与master设置ssh的免密码登录"></a>2.在idea这个开发环境的机器上，与master设置ssh的免密码登录</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在ssh下生成 id_rsa.pub、id_rsa</span></div><div class="line"> ssh-keygen -t rsa </div><div class="line"><span class="comment"># 将公钥复制到master下面</span></div><div class="line"> cp  id_rsa.pub honeycc_ id_rsa.pub</div><div class="line"> scp .ssh/honeycc_ id_rsa.pub czx-hadoop@<span class="number">192.168</span>.<span class="number">149.135</span>:~/.ssh/ </div><div class="line"><span class="comment"># 在master上，将公钥添加到 authorized_keys上</span></div><div class="line"> cat .ssh/honeycc_ id_rsa.pub &gt;&gt; authorized_keys</div><div class="line"> <span class="comment">#设置成功</span></div></pre></td></tr></table></figure>
-<h2 id="3-编写脚本，将开发环境与master进行开发"><a href="#3-编写脚本，将开发环境与master进行开发" class="headerlink" title="3.编写脚本，将开发环境与master进行开发"></a>3.编写脚本，将开发环境与master进行开发</h2><p><em>run.sh</em><br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/bin/sh</span></div><div class="line">jarname=<span class="variable">$1</span></div><div class="line">main=<span class="variable">$2</span></div><div class="line">dirctory=<span class="variable">$3</span></div><div class="line"><span class="keyword">if</span> [ <span class="string">"$#"</span> <span class="nomarkup">-eq</span> <span class="string">"3"</span> ];then</div><div class="line">    echo <span class="string">"你的jar包的名字是:$&#123;jarname&#125;"</span></div><div class="line">    echo <span class="string">"你所要执行的主类:$&#123;main&#125;"</span></div><div class="line">    echo <span class="string">"你所导入的文件目录:$&#123;dirctory&#125;"</span></div><div class="line"></div><div class="line">    echo <span class="string">" 将 $&#123;jarname&#125; 上传到主节点的hadoop路径下  master ~/hadoop/"</span></div><div class="line">    scp ../target/$&#123;jarname&#125; czx-hadoop@<span class="number">192.168</span>.<span class="number">149.135</span>:~/hadoop/</div><div class="line"></div><div class="line">    echo <span class="string">" 本地文件复制到主节点上 ../input/$&#123;dirctory&#125; czx-hadoop@192.168.149.135:~/input/$&#123;dirctory&#125;"</span></div><div class="line">    scp -r ../input/$&#123;dirctory&#125; czx-hadoop@<span class="number">192.168</span>.<span class="number">149.135</span>:~/input/</div><div class="line"></div><div class="line">    echo <span class="string">"在主节点链接 hdfs 创建文件夹 ./hadoop/bin/hadoop fs -mkdir /input/$&#123;dirctory&#125;"</span></div><div class="line">    ssh czx-hadoop@<span class="number">192.168</span>.<span class="number">149.135</span> <span class="string">"./hadoop/bin/hadoop fs -mkdir /input/$&#123;dirctory&#125;"</span></div><div class="line"></div><div class="line">    echo <span class="string">"将主节点上文件上传到hdfs上 ./hadoop/bin/hadoop fs -put ~/input/$&#123;dirctory&#125;/* /input/$&#123;dirctory&#125;/"</span></div><div class="line">    ssh czx-hadoop@<span class="number">192.168</span>.<span class="number">149.135</span> <span class="string">"./hadoop/bin/hadoop fs -put ~/input/$&#123;dirctory&#125;/* /input/$&#123;dirctory&#125;/"</span></div><div class="line"></div><div class="line">    echo <span class="string">"删除输出目录 ./hadoop/bin/hadoop rm -r /output/$&#123;dirctory&#125;"</span></div><div class="line">    ssh czx-hadoop@<span class="number">192.168</span>.<span class="number">149.135</span> <span class="string">"./hadoop/bin/hadoop fs -rmr /output/$&#123;dirctory&#125;"</span></div><div class="line"></div><div class="line">    echo <span class="string">" 执行$&#123;jarname&#125;  ./hadoop/bin/hadoop jar hadoop/$&#123;jarname&#125; $&#123;main&#125; /input/$&#123;dirctory&#125;/* /output/$&#123;dirctory&#125;"</span></div><div class="line">    ssh czx-hadoop@<span class="number">192.168</span>.<span class="number">149.135</span> <span class="string">"./hadoop/bin/hadoop jar hadoop/$&#123;jarname&#125; $&#123;main&#125; /input/$&#123;dirctory&#125;/* /output/$&#123;dirctory&#125;"</span></div><div class="line"></div><div class="line">    ssh czx-hadoop@<span class="number">192.168</span>.<span class="number">149.135</span> <span class="string">"rm -r ~/output/$&#123;dirctory&#125;"</span></div><div class="line"></div><div class="line">    echo <span class="string">"从hdfs取出执行完成的结果 ./hadoop/bin/hadoop fs -get /output/$&#123;dirctory&#125; ~/output/$&#123;dirctory&#125;"</span></div><div class="line">    ssh czx-hadoop@<span class="number">192.168</span>.<span class="number">149.135</span> <span class="string">"./hadoop/bin/hadoop fs -get /output/$&#123;dirctory&#125; ~/output/$&#123;dirctory&#125;"</span></div><div class="line"></div><div class="line">    echo <span class="string">"将结果复制到本地"</span></div><div class="line">    rm -r ../output/$&#123;dirctory&#125;</div><div class="line">    scp -r  czx-hadoop@<span class="number">192.168</span>.<span class="number">149.135</span>:~/output/$&#123;dirctory&#125;/ ../output/</div><div class="line"><span class="keyword">else</span></div><div class="line">    echo <span class="string">"需要提供3个参数，你只提供了 $# 参数,第一个参数为jar名字，第二个为执行主函数 第三个为输入文件的文件夹名字 eg: remoteHadoop-1.0-SNAPSHOT.jar com.zju.czx.WordCount words"</span></div><div class="line">fi</div></pre></td></tr></table></figure></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>这样一来就减少了每次再手动与虚拟机进行脚本，一个脚本就进行操作了。在执行上可能要按照规定好规则去执行。目录结构的创建也要按照规则去创建。不过自己使用起来还是很方便的，而且用maven对其进行打包控制，可以重复编写多个mapreduce程序，只要在执行脚本的时候设定好主类就好了。</strong><br><figure class="highlight powershell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./run.sh  remoteHadoop-<span class="number">1.0</span>-SNAPSHOT.jar com.zju.czx.WordCount words</div><div class="line"><span class="comment"># jar包，主类类名，程序要读取的文件夹</span></div></pre></td></tr></table></figure></p>
+<h4 id="Spring通过应用上下文-ApplicationContext-装载bean的定义并把他们组装起来，全权负责对象的创建和组装。"><a href="#Spring通过应用上下文-ApplicationContext-装载bean的定义并把他们组装起来，全权负责对象的创建和组装。" class="headerlink" title="Spring通过应用上下文(ApplicationContext)装载bean的定义并把他们组装起来，全权负责对象的创建和组装。"></a>Spring通过应用上下文(ApplicationContext)装载bean的定义并把他们组装起来，全权负责对象的创建和组装。</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">    //编程式注入</div><div class="line">    ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml</div><div class="line">    ");</div><div class="line">//从类路径下</div><div class="line">//FileSystemXmlApplicationContext:读取文件系统下</div><div class="line">//XmlWebApplicationContext:读取Web应用下的</div><div class="line">    IntefaceBean bean = (IntefaceBean)context.getBean("beanname");</div><div class="line">    bean.method();</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- beans.xml --&gt;</span></div><div class="line"> <span class="comment">&lt;!--构造注入--&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanname"</span> <span class="attr">class</span>=<span class="string">"com.zju.inteface.Bean"</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">constructor-arg</span> <span class="attr">ref</span>=<span class="string">"otherbean"</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"> <span class="comment">&lt;!-- 工厂方法注入 --&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanname"</span> <span class="attr">class</span>=<span class="string">"com.zju.inteface.Bean"</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">factory-method="getInstance"</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span>--&gt;</div><div class="line">   <span class="comment">&lt;!-- setter注入 --&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanname"</span> <span class="attr">class</span>=<span class="string">"com.zju.inteface.Bean"</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"parameter"</span> <span class="attr">value</span>=<span class="string">"value"</span>&gt;</span> </div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"beanname"</span> <span class="attr">ref</span>=<span class="string">"otherbean"</span>&gt;</span> </div><div class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"> <span class="comment">&lt;!-- 内部注入 --&gt;</span></div><div class="line">       <span class="comment">&lt;!-- setter注入 --&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanname"</span> <span class="attr">class</span>=<span class="string">"com.zju.inteface.Bean"</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"beanname"</span>&gt;</span></div><div class="line">         <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"com.zju.inteface.otherBean"</span> /&gt;</span></div><div class="line">     <span class="tag">&lt;/<span class="name">property</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"otherbean"</span> <span class="attr">class</span>=<span class="string">"com.zju.inteface.otherBean"</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="AOP显示实例，在方法之前或者之后插入功能点方法"><a href="#AOP显示实例，在方法之前或者之后插入功能点方法" class="headerlink" title="AOP显示实例，在方法之前或者之后插入功能点方法"></a>AOP显示实例，在方法之前或者之后插入功能点方法</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">      <span class="comment">&lt;!--pointBean包含before和after方法--&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"pointBean"</span> <span class="attr">class</span>=<span class="string">"com.zju.inteface.pointBean"</span>&gt;</span></div><div class="line">   <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div><div class="line">   <span class="tag">&lt;<span class="name">aop:config</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">ref</span>=<span class="string">"pointBean"</span>&gt;</span></div><div class="line">            <span class="comment">&lt;!--定义切面--&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">aop:pointcut</span> <span class="attr">id</span>=<span class="string">"idname"</span> <span class="attr">expression</span>=<span class="string">"execution(* *)"</span> /&gt;</span></div><div class="line">            <span class="comment">&lt;!--声明后置通知--&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">aop:before</span> <span class="attr">pointcut-ref</span>=<span class="string">"idname"</span> <span class="attr">method</span>=<span class="string">"before"</span>&gt;</span></div><div class="line">            <span class="comment">&lt;!--声明前置通知--&gt;</span></div><div class="line">           <span class="tag">&lt;<span class="name">aop:after</span> <span class="attr">pointcut-ref</span>=<span class="string">"idname"</span> <span class="attr">method</span>=<span class="string">"aftetr"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;/<span class="name">aop:aspec</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">aop:config</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="bean"><a href="#bean" class="headerlink" title="bean"></a>bean</h4><p><strong>bean的生命周期</strong><br>1-&gt; Spring对bean <strong>实例化</strong><br>2-&gt; Spring将值和Bean的引用注入进Bean对应的 <strong>属性</strong> 中<br>3-&gt; 如果bean实现了 <strong>BeanNameAware</strong> 接口，Spring将Bean的ID传递给setBeanName()的接口方法<br>4-&gt; 如果bean实现了 <strong>BeanFactoryAware </strong>接口，Spring将调用setBeanFactory()接口方法，将BeanFactory容器实例传入<br>5-&gt; 如果bean实现了 <strong>applicationContextAware </strong> 接口，Spring将调用setApplicationContext()接口方法，将应用上下文引用传入<br>6-&gt; 如果bean实现了 <strong>BeanPostProcessor</strong> 接口，Spring将调用它们的postProcessBeforeInitialization()接口方法<br>7-&gt; 如果bean实现了 <strong>InitlializaingBean</strong> 接口，Spring将调用它们的afterPropertiesSet()接口方法。bean的init-method也会被调用<br>8-&gt; 如果bean实了 <strong>BeanPostProcessor</strong> 接口，Spring将调用它们的postProcessAfterInitialization()接口方法<br>9-&gt; 到这里，bean已经 <strong>准备就绪</strong> ，可被调用并且一直驻留在应用上下文中，直到应用上下文被销毁<br>10-&gt; 如果bean实现了 <strong>DisposableBean</strong> 接口，Spring将调用它的destory()接口方法。bean的destory-method会被调用。<br><strong>bean的作用域</strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"otherbean"</span> <span class="attr">class</span>=<span class="string">"com.zju.inteface.otherBean"</span> <span class="attr">scope</span>=<span class="string">"singleton"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>1、singleton:当一个bean的作用域为singleton, 那么Spring IoC容器中只会存在一个共享的bean实例，并且所有对bean的请求，只要id与该bean定义相匹配，则只会返回bean的同一实例。<br>2、prototype：一个bean定义对应多个对象实例。Prototype作用域的bean会导致在每次对该bean请求（将其注入到另一个bean中，或者以程序的方式调用容器的getBean()方法）时都会创建一个新的bean实例。根据经验，对有状态的bean应该使用prototype作用域，而对无状态的bean则应该使用singleton作用域。<br>3、request：在一次HTTP请求中，一个bean定义对应一个实例；即每次HTTP请求将会有各自的bean实例，它们依据某个bean定义创建而成。该作用域仅在基于web的Spring ApplicationContext情形下有效。<br>4、session：在一个HTTP Session中，一个bean定义对应一个实例。该作用域仅在基于web的Spring ApplicationContext情形下有效。<br>5、global session：在一个全局的HTTP Session中，一个bean定义对应一个实例。典型情况下，仅在使用portlet context的时候有效。该作用域仅在基于web的Spring ApplicationContext情形下有效。</p>
+<h3 id="Spring-XML配置"><a href="#Spring-XML配置" class="headerlink" title="Spring XML配置"></a>Spring XML配置</h3><h4 id="Bean的自动装配"><a href="#Bean的自动装配" class="headerlink" title="Bean的自动装配"></a>Bean的自动装配</h4><ol>
+<li>byName:把与Bean的属性具有相同名字(或ID)的其他Bean自动装配到Bean的对应属性中。</li>
+<li>byType:把与Bean的属性具有相同类型，多个子类会异常，可指定主要。</li>
+<li>constructor:构造器自动装配</li>
+<li>autodetect:authowire=”autodetect” spring自动选择装备</li>
+<li>选择注解自动装备，更细粒度。<br><context:annotation-scan base-package=""> : 自动检测,扫描制定包<br>为自动检测标注Bean：@Component @Controller @Repository @Service<br><context:annotation-config><br>@autowired @Inject @Resource<br> (1).@autowired<pre><code>@Qualifier(&quot;oneSubBean&quot;)//限定子类的某个bean，限定歧义依赖
+</code></pre> (2).@Inject:包含@Autowired的所以功能，并且可以让@Inject注入一个Provider，Provider接口可以实现Bean引用的延迟注入以及注入Bean的多个实例。<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">private</span> Set&lt;Bean&gt; beans;</div><div class="line">    <span class="meta">@Inject</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SubBean</span><span class="params">(Provider&lt;Bean&gt; beanProvider)</span></span>&#123;</div><div class="line">    beans = <span class="keyword">new</span> HashSet&lt;Bean&gt;();</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</div><div class="line">    beans.add(beanProvider.get());</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</context:annotation-config></context:annotation-scan></li>
+</ol>
 
       
     </div>
@@ -431,9 +435,9 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
       
         <div class="post-tags">
           
-            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
           
-            <a href="/tags/idea/" rel="tag"># idea</a>
+            <a href="/tags/Spring-bean/" rel="tag"># Spring bean</a>
           
         </div>
       
@@ -442,8 +446,8 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/28/hadoop/" rel="next" title="多台虚拟机搭建hadoop环境">
-                <i class="fa fa-chevron-left"></i> 多台虚拟机搭建hadoop环境
+              <a href="/2016/12/25/JS-JQuery基础/" rel="next" title="JS+JQuery基础">
+                <i class="fa fa-chevron-left"></i> JS+JQuery基础
               </a>
             
           </div>
@@ -452,8 +456,8 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/08/mybatis源码分析/" rel="prev" title="mybatis-配置加载-源码分析">
-                mybatis-配置加载-源码分析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/01/03/Java多线程-Lock/" rel="prev" title="Java多线程-Lock">
+                Java多线程-Lock <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -469,10 +473,10 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/12/05/idea下使用脚本在远程hadoop环境去执行和交互/"
-     data-title="idea下使用脚本在远程hadoop环境去执行和交互"
+        <div class="ds-share flat" data-thread-key="2016/12/28/Spring技术内幕-1/"
+     data-title="Spring技术内幕-1"
      data-content=""
-     data-url="http://honeyz.github.io/2016/12/05/idea下使用脚本在远程hadoop环境去执行和交互/">
+     data-url="http://honeyz.github.io/2016/12/28/Spring技术内幕-1/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -499,8 +503,8 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/05/idea下使用脚本在远程hadoop环境去执行和交互/"
-           data-title="idea下使用脚本在远程hadoop环境去执行和交互" data-url="http://honeyz.github.io/2016/12/05/idea下使用脚本在远程hadoop环境去执行和交互/">
+      <div class="ds-thread" data-thread-key="2016/12/28/Spring技术内幕-1/"
+           data-title="Spring技术内幕-1" data-url="http://honeyz.github.io/2016/12/28/Spring技术内幕-1/">
       </div>
     
   </div>
@@ -635,7 +639,7 @@ input 文件下放程序需要读取的文件，每个程序对应input下一个
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-idea创建maven工程，目录结构如下"><span class="nav-number">1.</span> <span class="nav-text">1.idea创建maven工程，目录结构如下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-在idea这个开发环境的机器上，与master设置ssh的免密码登录"><span class="nav-number">2.</span> <span class="nav-text">2.在idea这个开发环境的机器上，与master设置ssh的免密码登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-编写脚本，将开发环境与master进行开发"><span class="nav-number">3.</span> <span class="nav-text">3.编写脚本，将开发环境与master进行开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-4种关键策略"><span class="nav-number">1.</span> <span class="nav-text">Spring-4种关键策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring通过应用上下文-ApplicationContext-装载bean的定义并把他们组装起来，全权负责对象的创建和组装。"><span class="nav-number">1.1.</span> <span class="nav-text">Spring通过应用上下文(ApplicationContext)装载bean的定义并把他们组装起来，全权负责对象的创建和组装。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AOP显示实例，在方法之前或者之后插入功能点方法"><span class="nav-number">1.2.</span> <span class="nav-text">AOP显示实例，在方法之前或者之后插入功能点方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bean"><span class="nav-number">1.3.</span> <span class="nav-text">bean</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-XML配置"><span class="nav-number">2.</span> <span class="nav-text">Spring XML配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bean的自动装配"><span class="nav-number">2.1.</span> <span class="nav-text">Bean的自动装配</span></a></li></ol></li></ol></div>
             
 
           </div>
